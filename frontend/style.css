@@ -249,6 +249,44 @@ body {
     100% { left: 100%; }
 }
 
+/* ─── Premium Danger Button (Clear History) ───────── */
+.btn-premium-danger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+.btn-premium-danger:hover {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #f87171;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
+    transform: translateY(-1px);
+}
+
+.btn-premium-danger:active {
+    transform: translateY(0) scale(0.96);
+}
+
+.btn-premium-danger i {
+    font-size: 13px;
+    transition: transform 0.3s ease;
+}
+
+.btn-premium-danger:hover i {
+    transform: rotate(-10deg) scale(1.1);
+}
+
 /* Section slide-in animation for ML sections */
 #section-for-you,
 #section-because {
