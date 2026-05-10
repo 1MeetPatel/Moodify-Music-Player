@@ -1002,30 +1002,25 @@ document.addEventListener('DOMContentLoaded', () => {
         setModalAvatar(savedPhoto);
         const savedUsername = localStorage.getItem('moodify_profile_username') || '';
         profileSaveSuccess.classList.add('hidden');
-        profileModal.classList.remove('hidden');
+        profileModal.classList.add('modal-open');
         
         // Ensure "Remove Photo" button shows if there's a staged/persisted photo
         if (stagedPhoto) profileRemovePhotoBtn.classList.remove('hidden');
         else profileRemovePhotoBtn.classList.add('hidden');
 
-        // Re-trigger slide-in animation
-        const card = profileModal.querySelector('.relative.z-10');
-        card.style.animation = 'none';
-        void card.offsetWidth;
-        card.style.animation = '';
         setTimeout(() => profileUsernameInput.focus(), 100);
     });
 
     // --- Close modal ---
     function closeProfileModal() {
-        profileModal.classList.add('hidden');
+        profileModal.classList.remove('modal-open');
         stagedPhoto = null;
         profilePhotoInput.value = ''; // reset file input
     }
     profileModalClose.addEventListener('click', closeProfileModal);
     profileModalBackdrop.addEventListener('click', closeProfileModal);
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !profileModal.classList.contains('hidden')) {
+        if (e.key === 'Escape' && profileModal.classList.contains('modal-open')) {
             closeProfileModal();
         }
     });

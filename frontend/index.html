@@ -284,12 +284,12 @@
     </div>
 
     <!-- ===== PROFILE MODAL ===== -->
-    <div id="profile-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden">
+    <div id="profile-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 invisible pointer-events-none">
         <!-- Backdrop -->
-        <div id="profile-modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div id="profile-modal-backdrop" class="absolute inset-0 bg-black/80 opacity-0"></div>
 
             <!-- Modal Card -->
-        <div class="relative z-10 w-full max-w-sm mx-4 bg-[#181818] border border-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center" style="animation: modalSlideIn 0.3s ease">
+        <div id="profile-modal-card" class="relative z-10 w-full max-w-sm mx-4 bg-[#181818] border border-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center">
 
             <!-- Close Button -->
             <button id="profile-modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white transition text-xl">
@@ -345,9 +345,32 @@
     </div>
 
     <style>
-        @keyframes modalSlideIn {
-            from { opacity: 0; transform: translateY(-20px) scale(0.97); }
-            to   { opacity: 1; transform: translateY(0)   scale(1); }
+        /* ── Profile Modal: pure GPU transitions ── */
+        #profile-modal {
+            transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+        }
+        #profile-modal-backdrop {
+            transition: opacity 0.25s ease;
+        }
+        #profile-modal-card {
+            opacity: 0;
+            transform: translate3d(0, 20px, 0);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        /* Open state */
+        #profile-modal.modal-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transition: opacity 0.25s ease, visibility 0s linear 0s;
+        }
+        #profile-modal.modal-open #profile-modal-backdrop {
+            opacity: 1;
+        }
+        #profile-modal.modal-open #profile-modal-card {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
         }
     </style>
 
