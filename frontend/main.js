@@ -154,15 +154,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function setSmartMode(on) {
         smartModeOn = on;
         if (on) {
-            smartModeLabel.textContent = 'Smart Mode: ON';
-            smartModeDot.classList.replace('bg-gray-600', 'bg-[#1DB954]');
-            smartModeToggle.classList.add('border-[#1DB954]/60', 'text-[#1DB954]');
-            smartModeToggle.classList.remove('border-gray-700/50', 'text-gray-400');
+            smartModeToggle.classList.add('active');
         } else {
-            smartModeLabel.textContent = 'Smart Mode: OFF';
-            smartModeDot.classList.replace('bg-[#1DB954]', 'bg-gray-600');
-            smartModeToggle.classList.remove('border-[#1DB954]/60', 'text-[#1DB954]');
-            smartModeToggle.classList.add('border-gray-700/50', 'text-gray-400');
+            smartModeToggle.classList.remove('active');
         }
     }
 
@@ -243,11 +237,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateGreeting = () => {
         const hours = new Date().getHours();
         if (hours < 12) {
-            dynamicGreeting.innerHTML = 'Good Morning <span class="text-2xl">☀️</span>';
+            dynamicGreeting.textContent = 'Good Morning';
         } else if (hours < 18) {
-            dynamicGreeting.innerHTML = 'Good Afternoon <span class="text-2xl">🌤️</span>';
+            dynamicGreeting.textContent = 'Good Afternoon';
         } else {
-            dynamicGreeting.innerHTML = 'Good Evening <span class="text-2xl">👋</span>';
+            dynamicGreeting.textContent = 'Good Evening';
         }
     };
     updateGreeting();
@@ -454,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchSmartRecommend(mood, limit = 15) {
         resetView();
         uiLoadState();
-        sectionTitle.textContent = `✨ Smart Mix · ${mood.charAt(0).toUpperCase() + mood.slice(1)}`;
+        sectionTitle.textContent = `Smart Mix \u00b7 ${mood.charAt(0).toUpperCase() + mood.slice(1)}`;
 
         const favorites = getFavorites();
         const history   = getHistory();
@@ -984,8 +978,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (greetingEl) {
                 const hours = new Date().getHours();
                 const greetText = hours < 12 ? 'Good Morning' : hours < 18 ? 'Good Afternoon' : 'Good Evening';
-                const emoji     = hours < 12 ? '☀️' : hours < 18 ? '🌤️' : '👋';
-                greetingEl.innerHTML = `${greetText}, ${savedUsername} <span class="text-2xl">${emoji}</span>`;
+                greetingEl.textContent = `${greetText}, ${savedUsername}`;
             }
         }
     }
@@ -1053,8 +1046,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (greetingEl) {
             const hours     = new Date().getHours();
             const greetText = hours < 12 ? 'Good Morning' : hours < 18 ? 'Good Afternoon' : 'Good Evening';
-            const emoji     = hours < 12 ? '☀️' : hours < 18 ? '🌤️' : '👋';
-            greetingEl.innerHTML = `${greetText}${username ? ', ' + username : ''} <span class="text-2xl">${emoji}</span>`;
+            greetingEl.textContent = `${greetText}${username ? ', ' + username : ''}`;
         }
 
         // Success flash → auto close
